@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPMARY MINI STORE - Quality Foodstuffs & Skin Care in Awka</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS VARIABLES & RESET */
+        :root {
+            --primary-blue: #0A2540;
+            --secondary-blue: #1A365D;
+            --accent-yellow: #FFC72C;
+            --accent-yellow-hover: #E5B220;
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --bg-light: #F7FAFC;
+            --white: #FFFFFF;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-blue);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(255, 255, 255, 0.1);
+            border-top: 6px solid var(--accent-yellow);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        .preloader-text {
+            color: var(--white);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* NAVIGATION BAR */
+        header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background-color: var(--primary-blue);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: var(--accent-yellow-hover);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), 
+                        url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: var(--white);
+            padding: 100px 20px 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #E2E8F0;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--accent-yellow);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+        }
+
+        /* GENERAL SECTION STYLES */
+        .section {
+            padding: 70px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary-blue);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-yellow);
+            border-radius: 2px;
+        }
+
+        /* PRODUCTS GRID */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--accent-yellow-hover);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        /* PAYMENT SECTION */
+        .payment-box {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: 3px solid var(--accent-yellow);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .payment-box h3 {
+            font-size: 1.5rem;
+            color: var(--accent-yellow);
+            margin-bottom: 20px;
+        }
+
+        .bank-details {
+            background-color: var(--secondary-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .bank-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .bank-row:last-child {
+            border-bottom: none;
+        }
+
+        .bank-row span:first-child {
+            color: #A0AEC0;
+            font-size: 0.9rem;
+        }
+
+        .bank-row span:last-child {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .copy-btn {
+            background-color: var(--accent-yellow);
+            color: var(--primary-blue);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--accent-yellow-hover);
+        }
+
+        .payment-note {
+            font-size: 0.85rem;
+            color: #E2E8F0;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* FOUNDER SECTION */
+        .founder-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .founder-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-yellow);
+            flex-shrink: 0;
+        }
+
+        .founder-info h3 {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .founder-title {
+            color: var(--accent-yellow-hover);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .founder-bio {
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* CONTACT & LOCATION */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-details {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            background-color: rgba(10, 37, 64, 0.1);
+            color: var(--primary-blue);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            color: var(--primary-blue);
+            margin-bottom: 2px;
+        }
+
+        .contact-text p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 250px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: #A0AEC0;
+        }
+
+        /* FLOATING WHATSAPP BUTTON */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-blue);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .founder-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">RAPMARY MINI STORE</div>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">R</div>
+                <span>RAPMARY MINI STORE</span>
+            </a>
+            <nav class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#payment">Payment Info</a>
+                <a href="#founder">Founder</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="https://wa.me/2348063394199" target="_blank" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+            </a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Quality Foodstuffs & Skin Care Products in Eke Awka Market</h1>
+            <p>Your trusted source for bulk and retail grocery items, Indomie, rice, beverages, Viva detergents, Eva soaps, fresh spices, and vegetables.</p>
+            <div class="hero-btns">
+                <a href="https://wa.me/2348063394199" target="_blank" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Chat & Order on WhatsApp
+                </a>
+                <a href="#payment" class="btn-secondary">View Payment Details</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS GRID -->
+    <section class="section" id="products">
+        <div class="section-title">
+            <h2>Our Featured Products</h2>
+        </div>
+        <div class="product-grid">
+            <!-- Indomie -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.ab69Cfmq26PUcuHNiHKRMgHaJ4?w=110&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Indomie Noodles" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Groceries</span>
+                    <h3 class="product-title">Cartons of Indomie Noodles</h3>
+                    <p class="product-desc">Available in Super Pack, Hungry Man, and standard carton sizes for family and retail.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Cartons%20of%20Indomie%20Noodles" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Rice -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.iGS8uHgMcv4fFVFAzUPcXQHaLT?w=110&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Bags of Rice" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Groceries</span>
+                    <h3 class="product-title">Bags of Quality Rice</h3>
+                    <p class="product-desc">Clean, stone-free local and foreign rice available in full bags, half bags, and paint buckets.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Bags%20of%20Rice" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Spaghetti -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.hLXRCAZsppTigSx144JfbQHaDs?w=249&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Spaghetti Packs" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Groceries</span>
+                    <h3 class="product-title">Spaghetti & Pasta Cartons</h3>
+                    <p class="product-desc">Top quality spaghetti brands sold in wholesale cartons and retail single packs.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Spaghetti%20Packs" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Seasonings -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.S5OZUzVXS7KSuOqj6COHVwHaHa?w=121&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Maggi and Knorr Cubes" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Spices & Seasonings</span>
+                    <h3 class="product-title">Maggi & Knorr Cubes</h3>
+                    <p class="product-desc">Essential cooking seasonings, spices, curry, and thyme for nutritious meal preparations.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Seasoning%20Cubes" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Fresh Vegetables -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.4iIqGqJjc6Q1l_5pbBueLQHaFX?w=193&h=140&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Carrots and Cabbages" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Fresh Produce</span>
+                    <h3 class="product-title">Fresh Cabbages & Carrots</h3>
+                    <p class="product-desc">Farm-fresh, crisp cabbages, carrots, and salad vegetables sourced directly for freshness.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Fresh%20Cabbages%20and%20Carrots" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="product-card">
+                <img src="https://th.bing.com/th/id/OIP.97vxvystZqj7J7x_RW1QYwHaGK?w=108&h=108&c=1&bgcl=5af3a5&r=0&o=7&pid=ImgRC&rm=3" alt="Beverages and Drinks" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Household</span>
+                    <h3 class="product-title">Provisions</h3>
+                    <p class="product-desc">Milk powders, chocolate drinks, tea bags, sugar, and general household provision stock.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Beverages" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Viva Detergent -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.Q8tO68GGtOAaG-vNIXy1sgHaJQ?w=110&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Viva Detergent" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Laundry Care</span>
+                    <h3 class="product-title">Detergents</h3>
+                    <p class="product-desc">Multi-purpose washing powders for bright, clean clothes and reliable grease removal.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Viva%20Detergent" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Eva Soap -->
+            <div class="product-card">
+                <img src="https://www.bing.com/th/id/OIP.p6VQgaRuTx-aQ5Zy46yWLwHaHa?w=127&h=128&c=8&rs=1&qlt=90&o=6&pid=ImgAns&rm=2" alt="Eva Beauty Soap" class="product-img">
+                <div class="product-info">
+                    <span class="product-category">Skin Care</span>
+                    <h3 class="product-title">Soaps</h3>
+                    <p class="product-desc">Nourishing bathing soaps and body care items for smooth, healthy, and fresh skin.</p>
+                    <a href="https://wa.me/2348063394199?text=Hello,%20I%20want%20to%20inquire%20about%20Eva%20Soaps" target="_blank" class="btn-whatsapp" style="justify-content: center; width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Order Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAYMENT SECTION -->
+    <section class="section" id="payment">
+        <div class="payment-box">
+            <i class="fas fa-university" style="font-size: 2.5rem; color: var(--accent-yellow); margin-bottom: 15px;"></i>
+            <h3>We Accept Bank Transfer</h3>
+            <p>Make direct transfers to our store account for quick order confirmation:</p>
+            
+            <div class="bank-details">
+                <div class="bank-row">
+                    <span>Bank Name:</span>
+                    <span>Moniepoint MFB</span>
+                </div>
+                <div class="bank-row">
+                    <span>Account Name:</span>
+                    <span>RAP ROM</span>
+                </div>
+                <div class="bank-row">
+                    <span>Account Number:</span>
+                    <span id="accountNumber">8235107616</span>
+                </div>
+            </div>
+
+            <button class="copy-btn" onclick="copyAccountDetails()">
+                <i class="fas fa-copy"></i> Copy Account Number
+            </button>
+
+            <p class="payment-note">
+                <i class="fas fa-info-circle"></i> After payment, please send your transfer receipt to us on WhatsApp (08063394199) for fast processing.
+            </p>
+        </div>
+    </section>
+
+    <!-- FOUNDER SECTION -->
+    <section class="section" id="founder">
+        <div class="section-title">
+            <h2>Meet The Founder</h2>
+        </div>
+        <div class="founder-card">
+            <img src="./rap mary.jpeg" alt="Founder of RAPMARY MINI STORE" class="founder-img">
+            <div class="founder-info">
+                <h3>Founder, RAPMARY MINI STORE</h3>
+                <div class="founder-title">Management & Operations</div>
+                <p class="founder-bio">
+                    "Welcome to RAPMARY MINI STORE! We are committed to delivering fresh, high-quality groceries, essential foodstuffs, and premium personal care products at affordable prices directly to households and businesses in Awka and surrounding areas."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & LOCATION -->
+    <section class="section" id="contact">
+        <div class="section-title">
+            <h2>Contact & Location</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Store Location</h4>
+                        <p>EKE AWKA Main Market, Awka, Anambra State, Nigeria.</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Phone & WhatsApp</h4>
+                        <p>08063394199</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Email Address</h4>
+                        <p>rapmaryministore@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <!-- Embedded Google Map Location for Eke Awka -->
+                <iframe src="https://maps.google.com/maps?q=Eke%20Awka%20Market,%20Awka&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 RAPMARY MINI STORE. All Rights Reserved. Located at EKE AWKA Main Market, Awka, Anambra State.</p>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/2348063394199" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Preloader Fade Out
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 600);
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close Mobile Menu on Nav Link Click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Copy Account Details Functionality
+        function copyAccountDetails() {
+            const accNum = "8235107616";
+            navigator.clipboard.writeText(accNum).then(() => {
+                alert("Moniepoint Account Number (8235107616) copied to clipboard!");
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
